@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-pptx-merger"
+version = "0.0.1"
+authors = [
+  { name="Hao Mei", email="wuximeihao@gmail.com" },
+]
+description = "Merge PowerPoint (.pptx) files"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Office/Business :: Office Suites",
+    "Topic :: Software Development :: Libraries",
+]
+keywords = ["powerpoint", "ppt", "pptx", "openxml", "office"]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "pythonnet>=3.0.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
+
+[tool.black]
+line-length = 88
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pptx_merger"]
