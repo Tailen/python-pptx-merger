@@ -14,6 +14,7 @@ from OpenXmlPowerTools import (  # type: ignore
     PmlDocument,
     SlideSource,
     PresentationBuilder,
+    OpenXmlMemoryStreamDocument,
 )
 
 
@@ -27,10 +28,18 @@ class SlideRef:
 
 
 class Merger:
+    @staticmethod
+    def get_dimensions(doc: BytesIO) -> tuple[int, int]:
+        streamDoc = OpenXmlMemoryStreamDocument(PmlDocument("doc.pptx", doc.getvalue()))
+        doc = streamDoc.GetPresentationDocument()
+        return (
+            doc.PresentationPart.Presentation.SlideSize.Cx.Value,
+            doc.PresentationPart.Presentation.SlideSize.Cy.Value,
+        )
+
+    @staticmethod
     def merge_slides(
-        self,
-        src_docs: list[BytesIO],
-        slide_refs: list[SlideRef] = [],
+        src_docs: list[BytesIO], slide_refs: list[SlideRef] = [],
     ) -> BytesIO:
         """
         Merge slides from src_docs and returns the merged document.
